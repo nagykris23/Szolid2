@@ -1,0 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var cors_1 = __importDefault(require("cors"));
+var product_router_1 = __importDefault(require("./Product/product.router"));
+var user_router_1 = __importDefault(require("./User/user.router"));
+var product_controller_1 = require("./Product/product.controller");
+var app = (0, express_1.default)();
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.get("/health", product_controller_1.run);
+app.use("/auth", user_router_1.default);
+app.use("/api/products", product_router_1.default);
+exports.default = app;
